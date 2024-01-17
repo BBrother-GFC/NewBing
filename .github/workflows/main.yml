@@ -2,7 +2,7 @@ name: Sync Fork
 
 on:
   workflow_run:
-    workflows: ["Sync Fork"]  # 触发工作流的名称，确保与工作流名称一致
+    workflows: ["SyncForkWorkflow"]  # 修改为新的工作流名称
     types:
       - started
   schedule:
