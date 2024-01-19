@@ -19,5 +19,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           owner: Harry-zklcdc 
           repo_name: go-proxy-bingai # 确保这里的仓库名匹配您要同步的仓库
-          head: main # 上游仓库的分支，默认通常为 main 或 master
+          head: master # 上游仓库的分支，默认通常为 main 或 master
           base: main # 您的仓库中将会更新的分支，确保这个是您想更新的分支名
