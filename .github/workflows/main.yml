@@ -2,15 +2,22 @@
 name: Sync Fork
 
 on:
-  push: # push 时触发, 主要是为了测试配置有没有问题
+  push: # 当推送发生时触发，用于测试配置是否有问题
   schedule:
-    - cron: '* */1 * * *' # 每3小时触发, 对于一些更新不那么频繁的项目可以设置为每天一次, 低碳一点
+    - cron: '0 */1 * * *' # 每1小时触发一次
+
 jobs:
   repo-sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: TG908/fork-sync@v1.6.3
+      - name: Checkout the repository
+        uses: actions/checkout@v2 # 此步骤将您的仓库代码签出到运行作业的虚拟机中
+
+      - name: Sync Fork
+        uses: TG908/fork-sync@v1.6.3
         with:
-          owner: Harry-zklcdc # fork 的上游仓库 user
-          head: master # fork 的上游仓库 branch
-          base: main # 本地仓库 branch
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          owner: Harry-zklcdc 
+          repo_name: go-proxy-bingai # 确保这里的仓库名匹配您要同步的仓库
+          head: main # 上游仓库的分支，默认通常为 main 或 master
+          base: main # 您的仓库中将会更新的分支，确保这个是您想更新的分支名
